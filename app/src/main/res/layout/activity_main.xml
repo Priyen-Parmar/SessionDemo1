@@ -5,11 +5,61 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/bg"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login Form" />
+        android:id="@+id/main_terms"
+        style="@style/text_12_black"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:text="By signing up, you agree to our Terms &amp; Privacy Policy" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_terms">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/icon" />
+
+            <EditText
+                style="@style/edit_14"
+                android:layout_marginTop="50dp"
+                android:hint="First Name" />
+
+            <EditText
+                style="@style/edit_14"
+                android:hint="Last Name" />
+
+            <EditText
+                style="@style/edit_14"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:maxLength="10" />
+
+            <Button
+                style="@style/button_14"
+                android:layout_marginTop="20dp"
+                android:text="Sign up" />
+
+            <TextView
+                style="@style/text_12_black"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Already have an account? Sign in" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
