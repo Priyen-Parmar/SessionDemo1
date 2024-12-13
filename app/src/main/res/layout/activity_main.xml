@@ -13,7 +13,7 @@
         style="@style/text_12_black"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:text="By signing up, you agree to our Terms &amp; Privacy Policy" />
 
     <ScrollView
@@ -27,36 +27,40 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="125dp"
-                android:layout_height="125dp"
+                android:layout_width="@dimen/_125sdp"
+                android:layout_height="@dimen/_125sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/icon" />
 
             <EditText
+                android:id="@+id/main_first_name"
                 style="@style/edit_14"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="@dimen/_50sdp"
                 android:hint="First Name" />
 
             <EditText
+                android:id="@+id/main_last_name"
                 style="@style/edit_14"
                 android:hint="Last Name" />
 
             <EditText
+                android:id="@+id/main_contact"
                 style="@style/edit_14"
                 android:hint="Phone Number"
                 android:inputType="phone"
                 android:maxLength="10" />
 
             <Button
+                android:id="@+id/main_signup"
                 style="@style/button_14"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:text="Sign up" />
 
             <TextView
                 style="@style/text_12_black"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Already have an account? Sign in" />
 
         </LinearLayout>
