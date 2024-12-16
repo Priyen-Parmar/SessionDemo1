@@ -1,5 +1,6 @@
 package com.session.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         signup = findViewById(R.id.main_signup);
 
@@ -47,8 +49,21 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("RESPONSE","Signup Successfully");
                     Log.e("RESPONSE","Signup Successfully");
                     Log.w("RESPONSE","Signup Successfully");
-                    Toast.makeText(MainActivity.this, "Signup Successfully", Toast.LENGTH_LONG).show();
-                    Snackbar.make(v,"Signup Successfully",Snackbar.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "Signup Successfully", Toast.LENGTH_LONG).show();
+                    new ToastCommonMethod(MainActivity.this, "Signup Successfully");
+
+                    //Snackbar.make(v,"Signup Successfully",Snackbar.LENGTH_SHORT).show();
+                    new ToastCommonMethod(v,"Signup Successfully");
+
+                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("FIRST_NAME",firstName.getText().toString());
+                    bundle.putString("LAST_NAME",lastName.getText().toString());
+                    bundle.putString("CONTACT",contact.getText().toString());
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    //new ToastCommonMethod(MainActivity.this, DashboardActivity.class);
+
                 }
             }
         });
