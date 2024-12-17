@@ -12,53 +12,110 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/text_12_black_match"
             android:layout_weight="2"
-            android:text="First Name"
-            style="@style/text_12_black_match"/>
+            android:text="First Name" />
 
         <TextView
             android:id="@+id/dashboard_firstname"
+            style="@style/text_12_black_match_bold"
             android:layout_weight="1"
-            android:background="@android:color/darker_gray"
-            style="@style/text_12_black_match_bold"/>
+            android:background="@android:color/darker_gray" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/_5sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
 
         <TextView
+            style="@style/text_12_black_match"
             android:layout_weight="2"
-            android:text="Last Name"
-            style="@style/text_12_black_match"/>
+            android:text="Last Name" />
 
         <TextView
             android:id="@+id/dashboard_lastname"
+            style="@style/text_12_black_match_bold"
             android:layout_weight="1"
-            android:background="@android:color/holo_red_light"
-            style="@style/text_12_black_match_bold"/>
+            android:background="@android:color/holo_red_light" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/_5sdp"
-        android:weightSum="3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:weightSum="3">
 
         <TextView
+            style="@style/text_12_black_match"
             android:layout_weight="2"
-            android:text="Contact"
-            style="@style/text_12_black_match"/>
+            android:text="Contact" />
 
         <TextView
             android:id="@+id/dashboard_contact"
+            style="@style/text_12_black_match_bold"
             android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
-            style="@style/text_12_black_match_bold"/>
+            android:background="@android:color/holo_green_light" />
 
     </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/dashboard_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <RadioButton
+            android:id="@+id/dashboard_male"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/dashboard_female"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+        <RadioButton
+            android:id="@+id/dashboard_transgender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Transgender" />
+
+    </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/dashboard_sport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Sport" />
+
+    <CheckBox
+        android:id="@+id/dashboard_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Game" />
+
+    <CheckBox
+        android:id="@+id/dashboard_dance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dance" />
+
+    <CheckBox
+        android:id="@+id/dashboard_reading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reading" />
+
+    <Button
+        android:id="@+id/dashboard_show"
+        android:text="Show"
+        android:layout_marginTop="@dimen/_20sdp"
+        style="@style/button_14"/>
 
 </LinearLayout>
