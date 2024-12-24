@@ -16,4 +16,13 @@
         android:hint="Select Date"
         style="@style/edit_14"/>
 
+
+    <EditText
+        android:editable="false"
+        android:id="@+id/time_picker"
+        android:drawablePadding="@dimen/_10sdp"
+        android:drawableRight="@drawable/clock_svg"
+        android:hint="Select Time"
+        style="@style/edit_14"/>
+
 </LinearLayout>
