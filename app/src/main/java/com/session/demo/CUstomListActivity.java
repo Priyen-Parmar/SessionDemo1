@@ -1,5 +1,6 @@
 package com.session.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -24,5 +25,14 @@ public class CUstomListActivity extends AppCompatActivity {
         CustomListAdapter adapter = new CustomListAdapter(CUstomListActivity.this,nameArray,imageArray);
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(CUstomListActivity.this, DetailActivity.class);
+            intent.putExtra("name", nameArray[position]);
+            intent.putExtra("image", imageArray[position]);
+            startActivity(intent);
+        } );
+
     }
+
+
 }
