@@ -24,11 +24,6 @@ public class DatetimePickerActivity extends AppCompatActivity {
     EditText dateEdit, timeEdit;
     Calendar calendar;
 
-    DatePicker Date;
-
-    Time time;
-    TimePicker time_picker;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

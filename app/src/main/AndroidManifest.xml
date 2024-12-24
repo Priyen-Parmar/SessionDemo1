@@ -13,7 +13,7 @@
         android:theme="@style/Theme.SessionDemo"
         tools:targetApi="31">
         <activity
-            android:name=".DatetimePickerActivity"
+            android:name=".CUstomListActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SpinnerListActivity"
+            android:name=".DatetimePickerActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".SpinnerListActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".DashboardActivity"
             android:exported="true" />

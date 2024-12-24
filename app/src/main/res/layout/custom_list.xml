@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/custom_list_image"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"/>
+
+    <TextView
+        android:id="@+id/custom_list_name"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        style="@style/text_12_black_match"/>
+
+</LinearLayout>
