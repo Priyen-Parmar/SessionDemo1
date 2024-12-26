@@ -1,6 +1,8 @@
 package com.session.demo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +47,14 @@ public class CustomListAdapter extends BaseAdapter {
 
         name.setText(nameArray[position]);
         image.setImageResource(imageArray[position]);
+
+        /*name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomListAdapter.this, customlistdash);
+                Bundle bundle = new Bundle();
+            }
+        });*/
 
         return view;
     }
