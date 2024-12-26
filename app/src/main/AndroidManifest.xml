@@ -13,11 +13,8 @@
         android:theme="@style/Theme.SessionDemo"
         tools:targetApi="31">
         <activity
-            android:name=".CategoryDetailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CustomListSecondActivity"
-            android:exported="true">
+            android:name=".RecylerDemoActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,11 +22,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".CategoryDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CustomListSecondActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".customlistdash"
             android:exported="false" />
         <activity
             android:name=".CUstomListActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".DatetimePickerActivity"
             android:exported="true" />
