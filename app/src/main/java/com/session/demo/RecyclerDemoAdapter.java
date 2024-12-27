@@ -18,17 +18,32 @@ public class RecyclerDemoAdapter extends RecyclerView.Adapter<RecyclerDemoAdapte
 
     Context context;
     ArrayList<CustomList> arrayList;
+    int iRecycler;
 
-    public RecyclerDemoAdapter(Context context, ArrayList<CustomList> arrayList) {
+    public RecyclerDemoAdapter(Context context, ArrayList<CustomList> arrayList,int iRecycler) {
         this.context = context;
         this.arrayList = arrayList;
+        this.iRecycler = iRecycler;
     }
 
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_recycler,parent,false);
-        return new MyHolder(view);
+        if(iRecycler==1){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_recycler,parent,false);
+            return new MyHolder(view);
+        }
+        else if(iRecycler==2){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_recycler_second,parent,false);
+            return new MyHolder(view);
+        }
+        else if(iRecycler==3){
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_recycler_third,parent,false);
+            return new MyHolder(view);
+        }
+        else{
+            return null;
+        }
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

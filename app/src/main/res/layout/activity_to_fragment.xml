@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityToFragmentActivity">
+
+    <Button
+        android:id="@+id/activity_fragment_button"
+        android:text="Open Fragment"
+        android:layout_marginTop="@dimen/_10sdp"
+        style="@style/button_14"/>
+
+    <LinearLayout
+        android:background="@color/color_D3435B"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:id="@+id/activity_fragment_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
