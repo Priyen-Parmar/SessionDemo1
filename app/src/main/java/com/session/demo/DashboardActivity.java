@@ -80,16 +80,16 @@ public class DashboardActivity extends AppCompatActivity {
         dance = findViewById(R.id.dashboard_dance);
         reading = findViewById(R.id.dashboard_reading);
 
-        /*sport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    new ToastCommonMethod(DashboardActivity.this,sport.getText().toString());
-                }
-            }
-        });
+//        sport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    new ToastCommonMethod(DashboardActivity.this,sport.getText().toString());
+//                }
+//            }
+//        });
 
-        game.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /*game.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
