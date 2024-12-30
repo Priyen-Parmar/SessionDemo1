@@ -1,5 +1,6 @@
 package com.session.demo;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     RadioGroup gender;
     CheckBox sport,game,dance,reading;
     Button show;
+    SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +35,15 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().setTitle("Dashboard");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        Bundle bundle = getIntent().getExtras();
+        sp = getSharedPreferences(ConstantSp.PREF,MODE_PRIVATE);
+        /*Bundle bundle = getIntent().getExtras();
         String sFirstName = bundle.getString("FIRST_NAME");
         String sLastName = bundle.getString("LAST_NAME");
-        String sContact = bundle.getString("CONTACT");
+        String sContact = bundle.getString("CONTACT");*/
+
+        String sFirstName = sp.getString(ConstantSp.FIRSTNAME,"");
+        String sLastName = sp.getString(ConstantSp.LASTNAME,"");
+        String sContact = sp.getString(ConstantSp.CONTACT,"");
 
         Log.d("RESPONSE",sFirstName+"\n"+sLastName+"\n"+sContact);
 
