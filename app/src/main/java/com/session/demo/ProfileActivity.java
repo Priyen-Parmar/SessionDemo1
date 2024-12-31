@@ -1,5 +1,8 @@
 package com.session.demo;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +16,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +29,7 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    Button editProfile,updateProfile;
+    Button editProfile,updateProfile,deleteProfile;
     EditText firstName, lastName, contact, email, password, confirm_password;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     RadioGroup gender;
@@ -33,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     String sGender, sCity;
 
+    TextView logout;
     SQLiteDatabase db;
     SharedPreferences sp;
     
@@ -50,6 +56,45 @@ public class ProfileActivity extends AppCompatActivity {
 
         editProfile = findViewById(R.id.profile_edit_button);
         updateProfile = findViewById(R.id.profile_update_button);
+        deleteProfile = findViewById(R.id.profile_delete_button);
+
+        deleteProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+                builder.setTitle("Account Delete!");
+                builder.setIcon(R.mipmap.ic_launcher);
+                builder.setMessage("Are You Sure Want to delete your account?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String deletQuery = "DELETE FROM USERS WHERE USERID='"+sp.getString(ConstantSp.USERID,"")+"'";
+                        db.execSQL(deletQuery);
+                        Toast.makeText(ProfileActivity.this, "Profile Deleted Successfully", Toast.LENGTH_SHORT).show();
+
+                        sp.edit().clear().commit();
+                        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Rate Us", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(ProfileActivity.this, "Rate Us", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(false);
+                builder.show();
+            }
+        });
 
         firstName = findViewById(R.id.profile_first_name);
         lastName = findViewById(R.id.profile_last_name);
@@ -57,6 +102,17 @@ public class ProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.profile_email);
         password = findViewById(R.id.profile_password);
         confirm_password = findViewById(R.id.profile_confirm_password);
+
+        logout = findViewById(R.id.profile_logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sp.edit().clear().commit();
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +150,21 @@ public class ProfileActivity extends AppCompatActivity {
                     new ToastCommonMethod(ProfileActivity.this, "Please Select Gender");
                 }
                 else {
+                    String updateQuery = "UPDATE USERS SET FIRSTNAME='"+firstName.getText().toString()+"',LASTNAME='"+lastName.getText().toString()+"', CONTACT='"+contact.getText().toString()+"',EMAIL='"+email.getText().toString()+"',PASSWORD='"+password.getText().toString()+"',GENDER='"+sGender+"',CITY='"+sCity+"' WHERE USERID='"+sp.getString(ConstantSp.USERID,"")+"'";
+                    db.execSQL(updateQuery);
+
+                    Toast.makeText(ProfileActivity.this, "Profile Update Successfully", Toast.LENGTH_SHORT).show();
+
+                    sp.edit().putString(ConstantSp.FIRSTNAME,firstName.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.LASTNAME,lastName.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
+                    sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                    sp.edit().putString(ConstantSp.CITY,sCity).commit();
+
                     setData(false);
+
                     /*String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"' ";
                     Cursor cursor = db.rawQuery(selectQuery,null);
                     if(cursor.getCount()>0){

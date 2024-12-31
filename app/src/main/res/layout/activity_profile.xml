@@ -108,10 +108,17 @@
                 android:text="Update Profile" />
 
             <TextView
+                android:id="@+id/profile_logout"
                 style="@style/text_12_black"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="Logout" />
+
+            <Button
+                android:id="@+id/profile_delete_button"
+                style="@style/button_14"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Delete Profile" />
 
         </LinearLayout>
     </ScrollView>

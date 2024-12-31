@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     //implementation("com.intuit.sdp:sdp-android:1.1.1")
+    //implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
     implementation(libs.sdpandroid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
