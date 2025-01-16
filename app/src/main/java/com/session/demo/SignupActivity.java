@@ -1,8 +1,10 @@
 package com.session.demo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.SignalStrengthUpdateRequest;
 import android.util.Log;
@@ -23,7 +25,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -89,17 +95,14 @@ public class SignupActivity extends AppCompatActivity {
                     new ToastCommonMethod(SignupActivity.this,"Please Accept Terms & Condition");
                 }
                 else {
-                    String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"' ";
-                    Cursor cursor = db.rawQuery(selectQuery,null);
-                    if(cursor.getCount()>0){
-                        new ToastCommonMethod(SignupActivity.this, "User Already Exists");
-                        onBackPressed();
+                    //doSqliteSignup();
+                    if(new ConnectionDetector(SignupActivity.this).networkConnected()){
+                        new doSignup().execute();
                     }
                     else{
-                        String insertQuery = "INSERT INTO USERS VALUES (NULL,'"+firstName.getText().toString()+"','"+lastName.getText().toString()+"','"+contact.getText().toString()+"','"+email.getText().toString()+"','"+password.getText().toString()+"','"+sGender+"','"+sCity+"')";
-                        db.execSQL(insertQuery);
-                        new ToastCommonMethod(SignupActivity.this, "Signup Successfully");
+                        new ConnectionDetector(SignupActivity.this).networkDisconnected();
                     }
+
 
                     /*System.out.println("Signup Successfully");
                     Log.d("RESPONSE", "Signup Successfully");
@@ -166,5 +169,65 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void doSqliteSignup() {
+        String selectQuery = "SELECT * FROM USERS WHERE EMAIL='"+email.getText().toString()+"' OR CONTACT='"+contact.getText().toString()+"' ";
+        Cursor cursor = db.rawQuery(selectQuery,null);
+        if(cursor.getCount()>0){
+            new ToastCommonMethod(SignupActivity.this, "User Already Exists");
+            onBackPressed();
+        }
+        else{
+            String insertQuery = "INSERT INTO USERS VALUES (NULL,'"+firstName.getText().toString()+"','"+lastName.getText().toString()+"','"+contact.getText().toString()+"','"+email.getText().toString()+"','"+password.getText().toString()+"','"+sGender+"','"+sCity+"')";
+            db.execSQL(insertQuery);
+            new ToastCommonMethod(SignupActivity.this, "Signup Successfully");
+        }
+    }
+
+    private class doSignup extends AsyncTask<String,String,String> {
+
+        ProgressDialog pd;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd = new ProgressDialog(SignupActivity.this);
+            pd.setMessage("Please Wait...");
+            pd.setCancelable(false);
+            pd.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            HashMap<String,String> hashMap = new HashMap<>();
+            hashMap.put("firstname",firstName.getText().toString());
+            hashMap.put("lastname",lastName.getText().toString());
+            hashMap.put("contact",contact.getText().toString());
+            hashMap.put("email",email.getText().toString());
+            hashMap.put("password",password.getText().toString());
+            hashMap.put("gender",sGender);
+            hashMap.put("city",sCity);
+            return new MakeServiceCall().MakeServiceCall(ConstantSp.SIGNUP_URL,MakeServiceCall.POST,hashMap);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pd.dismiss();
+            try {
+                JSONObject object = new JSONObject(s);
+                if(object.getBoolean("status")){
+                    new ToastCommonMethod(SignupActivity.this,object.getString("message"));
+                    onBackPressed();
+                }
+                else{
+                    new ToastCommonMethod(SignupActivity.this,object.getString("message"));
+                }
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 }
