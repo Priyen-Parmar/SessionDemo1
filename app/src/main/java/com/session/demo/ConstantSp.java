@@ -12,8 +12,13 @@ public class ConstantSp {
     public static final String GENDER = "gender";
     public static final String CITY = "city";
 
-    public static final String BASEURL = "http://192.168.166.142/SessionApi/";
+    public static final String BASEURL = "http://192.168.1.25/SessionApi/";
     public static final String SIGNUP_URL = BASEURL+"signup.php";
+    public static final String LOGIN_URL = BASEURL+"login.php";
+    public static final String UPDATE_URL = BASEURL+"updateProfile.php";
+    public static final String DELETE_URL = BASEURL+"deleteProfile.php";
+
+    public static final String SERVER_ERROR = "Server Error Code : ";
 
 }
 
