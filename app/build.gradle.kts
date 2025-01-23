@@ -45,6 +45,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofitgson)
     implementation(libs.retrofitconvertor)
+    implementation(libs.circleimage)
+
+    implementation(libs.fishbun)
+    implementation(libs.coil)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

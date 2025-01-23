@@ -12,6 +12,9 @@ glide = "4.16.0"
 retrofit = "2.9.0"
 retrofitgson = "2.8.9"
 retrofitconvertor = "2.7.1"
+circleimage = "3.1.0"
+fishbun = "1.1.1"
+coil = "0.11.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -26,6 +29,9 @@ glide = {group = "com.github.bumptech.glide", name="glide", version.ref = "glide
 retrofit = {group = "com.squareup.retrofit2", name = "retrofit", version.ref="retrofit"}
 retrofitgson = {group = "com.google.code.gson", name = "gson", version.ref="retrofitgson"}
 retrofitconvertor = {group = "com.squareup.retrofit2", name = "converter-gson", version.ref="retrofitconvertor"}
+circleimage = {group = "de.hdodenhof", name = "circleimageview", version.ref="circleimage"}
+fishbun = {group="io.github.sangcomz" , name="fishbun", version.ref = "fishbun"}
+coil = {group="io.coil-kt", name="coil", version.ref = "coil"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

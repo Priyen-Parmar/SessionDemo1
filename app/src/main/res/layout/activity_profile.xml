@@ -17,6 +17,33 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <FrameLayout
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    app:civ_border_color="@color/color_red"
+                    app:civ_border_width="@dimen/_1sdp"
+                    android:src="@drawable/banner"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_camera"
+                    app:civ_circle_background_color="@color/white"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_gravity="bottom|end"
+                    app:civ_border_color="@color/color_red"
+                    app:civ_border_width="@dimen/_1sdp"
+                    android:src="@drawable/camera"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"/>
+
+            </FrameLayout>
+
             <EditText
                 android:id="@+id/profile_first_name"
                 style="@style/edit_14"
