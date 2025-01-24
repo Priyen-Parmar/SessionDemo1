@@ -39,18 +39,23 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -204,7 +209,12 @@ public class ProfileActivity extends AppCompatActivity {
                         pd.setMessage("Please Wait...");
                         pd.setCancelable(false);
                         pd.show();
-                        doUpdateRetrofit();
+                        if(sSelectedPath.equalsIgnoreCase("")){
+                            doUpdateRetrofit();
+                        }
+                        else{
+                            doUpdateImageRetrofit();
+                        }
                     }
                     else{
                         new ConnectionDetector(ProfileActivity.this).networkDisconnected();
@@ -275,8 +285,10 @@ public class ProfileActivity extends AppCompatActivity {
         cameraIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkAndRequestPermission()) {
-                    selectImageData();
+                if(updateProfile.getVisibility() == View.VISIBLE) {
+                    if (checkAndRequestPermission()) {
+                        selectImageData();
+                    }
                 }
             }
         });
@@ -420,6 +432,66 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void doUpdateImageRetrofit() {
+
+        RequestBody idPart = RequestBody.create(MultipartBody.FORM,sp.getString(ConstantSp.USERID,""));
+        RequestBody firstNamePart = RequestBody.create(MultipartBody.FORM,firstName.getText().toString());
+        RequestBody lastNamePart = RequestBody.create(MultipartBody.FORM,lastName.getText().toString());
+        RequestBody contactPart = RequestBody.create(MultipartBody.FORM,contact.getText().toString());
+        RequestBody emailPart = RequestBody.create(MultipartBody.FORM,email.getText().toString());
+        RequestBody passwordPart = RequestBody.create(MultipartBody.FORM,password.getText().toString());
+        RequestBody genderPart = RequestBody.create(MultipartBody.FORM,sGender);
+        RequestBody cityPart = RequestBody.create(MultipartBody.FORM,sCity);
+
+        File file = new File(sSelectedPath);
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("profile", file.getName(), RequestBody.create(MediaType.parse("image/*"), file));
+
+        Call<GetUpdateImageData> call = apiInterface.doUpdateImage(
+                firstNamePart,
+                lastNamePart,
+                contactPart,
+                emailPart,
+                passwordPart,
+                genderPart,
+                cityPart,
+                idPart,
+                filePart
+        );
+
+        call.enqueue(new Callback<GetUpdateImageData>() {
+            @Override
+            public void onResponse(Call<GetUpdateImageData> call, Response<GetUpdateImageData> response) {
+                pd.dismiss();
+                if(response.code()==200){
+                    if(response.body().status){
+                        new ToastCommonMethod(ProfileActivity.this,response.body().message);
+                        sp.edit().putString(ConstantSp.FIRSTNAME,firstName.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.LASTNAME,lastName.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.EMAIL,email.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.CONTACT,contact.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.PASSWORD,password.getText().toString()).commit();
+                        sp.edit().putString(ConstantSp.GENDER,sGender).commit();
+                        sp.edit().putString(ConstantSp.CITY,sCity).commit();
+                        sp.edit().putString(ConstantSp.PROFILE,response.body().profile).commit();
+                        setData(false);
+                    }
+                    else{
+                        new ToastCommonMethod(ProfileActivity.this,response.body().message);
+                    }
+                }
+                else{
+                    new ToastCommonMethod(ProfileActivity.this,ConstantSp.SERVER_ERROR+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetUpdateImageData> call, Throwable t) {
+                pd.dismiss();
+                new ToastCommonMethod(ProfileActivity.this,t.getMessage());
+            }
+        });
+    }
+
     private void doUpdateRetrofit() {
         Call<GetSignupData> call = apiInterface.doUpdate(
                 firstName.getText().toString(),
@@ -522,6 +594,13 @@ public class ProfileActivity extends AppCompatActivity {
         contact.setText(sp.getString(ConstantSp.CONTACT,""));
         password.setText(sp.getString(ConstantSp.PASSWORD,""));
         confirm_password.setText(sp.getString(ConstantSp.PASSWORD,""));
+
+        if(sp.getString(ConstantSp.PROFILE,"").equalsIgnoreCase("")){
+            profileIv.setImageResource(R.mipmap.ic_launcher);
+        }
+        else{
+            Glide.with(ProfileActivity.this).load(sp.getString(ConstantSp.PROFILE,"")).placeholder(R.mipmap.ic_launcher).into(profileIv);
+        }
 
         if(sp.getString(ConstantSp.GENDER,"").equalsIgnoreCase("Male")){
             male.setChecked(true);

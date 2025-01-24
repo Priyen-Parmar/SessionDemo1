@@ -37,6 +37,9 @@ public class GetLoginData {
         @SerializedName("city")
         @Expose
         public String city;
+        @SerializedName("profile")
+        @Expose
+        public String profile;
         @SerializedName("status")
         @Expose
         public String status;

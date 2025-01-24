@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         sp.edit().putString(ConstantSp.PASSWORD, "").commit();
                         sp.edit().putString(ConstantSp.GENDER, response.body().userData.gender).commit();
                         sp.edit().putString(ConstantSp.CITY, response.body().userData.city).commit();
-
+                        sp.edit().putString(ConstantSp.PROFILE,response.body().userData.profile).commit();
                         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                         startActivity(intent);
                     }
