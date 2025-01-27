@@ -37,7 +37,10 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if(sp.getString(ConstantSp.USERID,"").equalsIgnoreCase("")){
+                Intent intent = new Intent(SplashActivity.this, AddPaymentActivity.class);
+                startActivity(intent);
+                finish();
+                /*if(sp.getString(ConstantSp.USERID,"").equalsIgnoreCase("")){
                     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -46,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
                     Intent intent = new Intent(SplashActivity.this, ProfileActivity.class);
                     startActivity(intent);
                     finish();
-                }
+                }*/
             }
         },3000);
 
