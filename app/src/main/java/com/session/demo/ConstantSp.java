@@ -21,5 +21,7 @@ public class ConstantSp {
 
     public static final String SERVER_ERROR = "Server Error Code : ";
 
+    public static final String FCM_ID = "fcm_id";
+
 }
 

@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.firebase)
 }
 
 android {
@@ -50,6 +51,10 @@ dependencies {
     implementation(libs.fishbun)
     implementation(libs.coil)
     implementation(libs.razorpay)
+
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

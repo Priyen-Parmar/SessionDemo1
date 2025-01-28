@@ -37,7 +37,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this, AddPaymentActivity.class);
+                //Intent intent = new Intent(SplashActivity.this, AddPaymentActivity.class);
+                Intent intent = new Intent(SplashActivity.this, NotificationActivity.class);
                 startActivity(intent);
                 finish();
                 /*if(sp.getString(ConstantSp.USERID,"").equalsIgnoreCase("")){
